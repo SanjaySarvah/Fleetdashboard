@@ -1,5 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// import TruckIcon from '../dashboard/assests/icons/truck-light-full.png'; 
+import TruckIcon from '../dashboard/assests/icons/truck-light-full.svg'; 
+import MovingIcon from '../dashboard/assests/icons/paper-plane-regular-full.svg';      
+import IdleIcon from '../dashboard/assests/icons/pause-regular-full.png';         
+import ParkedIcon from '../dashboard/assests/icons/stop-regular-full.png';    
+import ServiceIcon from '../dashboard/assests/icons/wrench-light-full 1.png';    
 
 function Top() {
   const stats = [
@@ -7,15 +14,15 @@ function Top() {
       title: 'Total vehicles',
       value: '8',
       subtitle: 'active today',
-      icon: 'bi-truck',
-      color: '#2F80ED',
+      icon: TruckIcon, 
+      color: '#3D83F5',
       percent: 100,
     },
     {
       title: 'Moving',
       value: '2',
       subtitle: 'currently active',
-      icon: 'bi-send-fill',
+      icon: MovingIcon, 
       color: '#27AE60',
       percent: 25,
     },
@@ -23,31 +30,30 @@ function Top() {
       title: 'Idle',
       value: '3',
       subtitle: 'engine on, stopped',
-      icon: 'bi-pause-btn-fill',
-      color: '#F2C94C',
+      icon: IdleIcon,
+      color: '#F49E0C',
       percent: 31,
     },
     {
       title: 'Parked',
       value: '3',
       subtitle: 'engine off',
-      icon: 'bi-stop-fill',
-      color: '#EB5757',
+      icon: ParkedIcon,
+      color: '#EF4343',
       percent: 38,
     },
     {
       title: 'Service',
       value: '3',
       subtitle: 'engine off, no data',
-      icon: 'bi-wrench-adjustable',
-      color: '#EB5757',
+      icon: ServiceIcon,
+      color: '#EF4343',
       percent: 10,
     },
-  ]
+  ];
 
   return (
     <div className="container-fluid py-3 px-3">
-      {/* ✅ Responsive Grid: 2 cards (mobile) → 5 cards (desktop) */}
       <div
         className="d-grid gap-3"
         style={{
@@ -68,26 +74,28 @@ function Top() {
                 <div
                   className="rounded-circle d-flex align-items-center justify-content-center mb-2"
                   style={{
-                    backgroundColor: `${item.color}20`,
+                    backgroundColor: `${item.color}`, 
                     width: 50,
                     height: 50,
                   }}
                 >
-                  <i
-                    className={`${item.icon}`}
-                    style={{ color: item.color, fontSize: '1.5rem' }}
-                  ></i>
+               <img
+  src={item.icon}
+  alt={item.title}
+  style={{ width: '24px', height: '24px', objectFit: 'contain' }}
+/>
+
                 </div>
+
                 <div>
-                  <h6 className="mb-1 fw-semibold text-secondary">
-                    {item.title}
-                  </h6>
-                  <h5 className="fw-bold mb-0">{item.value}</h5>
-                  <small className="text-muted">{item.subtitle}</small>
+                  <h6 className="mb-1 fw-medium fonttext-14">{item.title}</h6>
+                  <div className="d-flex align-items-center">
+                    <h5 className="fw-bold mb-0 me-2 fonttext-24">{item.value}</h5>
+                    <small className="fonttext-14 fw-medium">{item.subtitle}</small>
+                  </div>
                 </div>
               </div>
 
-              {/* Circular progress indicator */}
               <div
                 className="position-relative"
                 style={{
@@ -96,26 +104,31 @@ function Top() {
                 }}
               >
                 <svg width="45" height="45" viewBox="0 0 36 36">
-                  <path
-                    d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831
-                      a 15.9155 15.9155 0 0 1 0 -31.831"
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="15.9155"
                     fill="none"
                     stroke="#e6e6e6"
                     strokeWidth="3"
                   />
-                  <path
-                    d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831"
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="15.9155"
                     fill="none"
                     stroke={item.color}
                     strokeWidth="3"
-                    strokeDasharray={`${item.percent}, 100`}
+                    strokeDasharray="100"
+                    strokeDashoffset={100 - item.percent}
+                    strokeLinecap="round"
+                    transform="rotate(-90 18 18)"
                   />
                 </svg>
+
                 <span
-                  className="position-absolute top-50 start-50 translate-middle fw-semibold"
-                  style={{ fontSize: '0.8rem', color: 'black' }}
+                  className="position-absolute top-50 start-50 translate-middle fw-semibold fonttext-12"
+                  style={{ color: 'black' }}
                 >
                   {item.percent}%
                 </span>
@@ -125,7 +138,6 @@ function Top() {
         ))}
       </div>
 
-      {/* Responsive breakpoint for exact 5 per row */}
       <style>
         {`
           @media (min-width: 1200px) {
@@ -141,7 +153,7 @@ function Top() {
         `}
       </style>
     </div>
-  )
+  );
 }
 
-export default Top
+export default Top;
