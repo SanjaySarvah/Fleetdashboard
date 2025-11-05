@@ -14,55 +14,55 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
+  const dividerStyle = {
+    borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+    margin: "20px 0",
+  };
+
   return (
     <div
-      className={`position-fixed top-0 start-0 h-100 text-white shadow-lg`}
+      className="position-fixed top-0 start-0 h-100 text-white shadow-lg d-flex flex-column"
       style={{
         width: 260,
         zIndex: 1050,
         backgroundColor: "#4A7CF7",
         transform: open ? "translateX(0)" : "translateX(-100%)",
         transition: "transform 0.3s ease-in-out",
+        paddingTop: "20px",
       }}
     >
-      {/* Close Button */}
-      <div className="d-flex justify-content-end p-3">
-        <button
-          className="btn btn-sm btn-light rounded-circle"
-          onClick={toggle}
-        >
-          <i className="bi bi-x-lg"></i>
-        </button>
-      </div>
-
-      {/* Search */}
+      {/* 🔍 Search */}
       <div className="px-3 mb-3">
-        <div className="input-group">
-          <span className="input-group-text bg-white border-0">
-            <i className="bi bi-search text-secondary"></i>
-          </span>
+        <div
+          className="d-flex align-items-center rounded-4 px-3 py-2"
+          style={{ backgroundColor: "#fff" }}
+        >
+          <i className="bi bi-search text-secondary me-2"></i>
           <input
             type="text"
-            className="form-control border-0 shadow-none"
+            className="form-control border-0 shadow-none p-0"
             placeholder="Search"
+            style={{
+              background: "transparent",
+              fontSize: 15,
+              color: "#333",
+            }}
           />
         </div>
       </div>
 
+      {/* 🧭 Menu */}
       <ul className="list-unstyled px-3" style={{ fontSize: 15 }}>
         {/* Dashboard */}
         <li className="mb-2">
           <div
-            className="d-flex justify-content-between align-items-center fw-semibold py-2 px-3"
+            className="d-flex justify-content-between align-items-center fw-semibold py-2"
             onClick={() => handleMenuToggle("dashboard")}
-            style={{
-              cursor: "pointer",
-              backgroundColor: "rgba(255, 255, 255, 0.15)",
-              borderRadius: "8px",
-            }}
+            style={{ cursor: "pointer" }}
           >
-            <div>
-              <i className="bi bi-speedometer2 me-2"></i> Dashboard
+            <div className="d-flex align-items-center">
+              <i className="bi bi-speedometer2 me-2"></i>
+              Dashboard
             </div>
             <i
               className={`bi ${
@@ -74,21 +74,23 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             <div className="ms-4 mt-2">
               <Link
                 to="/dashboard-normal"
-                className="d-block text-white py-1 text-decoration-none ps-3"
-                style={{ opacity: 0.8 }}
+                className="d-block text-white text-decoration-none mb-2"
+                style={{ opacity: 0.85 }}
               >
-                Dashboard - Normal
+                Dashboard- Normal
               </Link>
               <Link
                 to="/dashboard-metro"
-                className="d-block text-white py-1 text-decoration-none ps-3"
-                style={{ opacity: 0.8 }}
+                className="d-block text-white text-decoration-none"
+                style={{ opacity: 0.85 }}
               >
-                Dashboard - Metro
+                Dashboard- Metro
               </Link>
             </div>
           </Collapse>
         </li>
+
+        <div style={dividerStyle}></div>
 
         {/* Vehicles */}
         <li className="mb-2">
@@ -97,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             onClick={() => handleMenuToggle("vehicles")}
             style={{ cursor: "pointer" }}
           >
-            <div>
+            <div className="d-flex align-items-center">
               <i className="bi bi-truck me-2"></i> Vehicles
             </div>
             <i
@@ -106,17 +108,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
               }`}
             ></i>
           </div>
-          <Collapse in={openMenu === "vehicles"}>
-            <div className="ms-4">
-              <Link
-                to="/vehicles-dashboard"
-                className="d-block text-white-50 py-1 text-decoration-none"
-              >
-                Vehicles Dashboard
-              </Link>
-            </div>
-          </Collapse>
         </li>
+
+        <div style={dividerStyle}></div>
 
         {/* Reports */}
         <li className="mb-2">
@@ -125,7 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             onClick={() => handleMenuToggle("reports")}
             style={{ cursor: "pointer" }}
           >
-            <div>
+            <div className="d-flex align-items-center">
               <i className="bi bi-file-earmark-text me-2"></i> Reports
             </div>
             <i
@@ -135,14 +129,40 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             ></i>
           </div>
           <Collapse in={openMenu === "reports"}>
-            <div className="ms-4">
-              <Link to="/reports-dashboard" className="d-block text-white-50 py-1 text-decoration-none">Reports Dashboard</Link>
-              <Link to="/reports-km" className="d-block text-white-50 py-1 text-decoration-none">Reports - Current KM</Link>
-              <Link to="/reports-trip" className="d-block text-white-50 py-1 text-decoration-none">Reports - Trip</Link>
-              <Link to="/reports-fuel" className="d-block text-white-50 py-1 text-decoration-none">Reports - Fuel</Link>
+            <div className="ms-4 mt-2">
+              <Link
+                to="/reports-dashboard"
+                className="d-block text-white text-decoration-none mb-1"
+                style={{ opacity: 0.85 }}
+              >
+                Reports Dashboard
+              </Link>
+              <Link
+                to="/reports-km"
+                className="d-block text-white text-decoration-none mb-1"
+                style={{ opacity: 0.85 }}
+              >
+                Reports- Current KM
+              </Link>
+              <Link
+                to="/reports-trip"
+                className="d-block text-white text-decoration-none mb-1"
+                style={{ opacity: 0.85 }}
+              >
+                Reports- Trip
+              </Link>
+              <Link
+                to="/reports-fuel"
+                className="d-block text-white text-decoration-none"
+                style={{ opacity: 0.85 }}
+              >
+                Reports- Fuel
+              </Link>
             </div>
           </Collapse>
         </li>
+
+        <div style={dividerStyle}></div>
 
         {/* Employee */}
         <li className="mb-2">
@@ -151,7 +171,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             onClick={() => handleMenuToggle("employee")}
             style={{ cursor: "pointer" }}
           >
-            <div>
+            <div className="d-flex align-items-center">
               <i className="bi bi-person me-2"></i> Employee
             </div>
             <i
@@ -161,22 +181,36 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             ></i>
           </div>
           <Collapse in={openMenu === "employee"}>
-            <div className="ms-4">
-              <Link to="/driver-dashboard" className="d-block text-white-50 py-1 text-decoration-none">Driver Dashboard</Link>
-              <Link to="/attendance-reports" className="d-block text-white-50 py-1 text-decoration-none">Attendance Reports</Link>
+            <div className="ms-4 mt-2">
+              <Link
+                to="/driver-dashboard"
+                className="d-block text-white text-decoration-none mb-1"
+                style={{ opacity: 0.85 }}
+              >
+                Driver Dashboard
+              </Link>
+              <Link
+                to="/attendance-reports"
+                className="d-block text-white text-decoration-none"
+                style={{ opacity: 0.85 }}
+              >
+                Attendance Reports
+              </Link>
             </div>
           </Collapse>
         </li>
 
-        {/* Routes */}
+        <div style={dividerStyle}></div>
+
+        {/* Routes & Zones */}
         <li className="mb-2">
           <div
             className="d-flex justify-content-between align-items-center fw-semibold py-2"
             onClick={() => handleMenuToggle("routes")}
             style={{ cursor: "pointer" }}
           >
-            <div>
-              <i className="bi bi-map me-2"></i> Routes & Zones
+            <div className="d-flex align-items-center">
+              <i className="bi bi-diagram-3 me-2"></i> Routes & Zones
             </div>
             <i
               className={`bi ${
@@ -185,11 +219,19 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             ></i>
           </div>
           <Collapse in={openMenu === "routes"}>
-            <div className="ms-4">
-              <Link to="/routes-dashboard" className="d-block text-white-50 py-1 text-decoration-none">Routes Dashboard</Link>
+            <div className="ms-4 mt-2">
+              <Link
+                to="/routes-dashboard"
+                className="d-block text-white text-decoration-none"
+                style={{ opacity: 0.85 }}
+              >
+                Routes Dashboard
+              </Link>
             </div>
           </Collapse>
         </li>
+
+        <div style={dividerStyle}></div>
 
         {/* Camera */}
         <li className="mb-2">
@@ -198,7 +240,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             onClick={() => handleMenuToggle("camera")}
             style={{ cursor: "pointer" }}
           >
-            <div>
+            <div className="d-flex align-items-center">
               <i className="bi bi-camera-video me-2"></i> Camera
             </div>
             <i
@@ -208,23 +250,24 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             ></i>
           </div>
           <Collapse in={openMenu === "camera"}>
-            <div className="ms-4">
-              <Link to="/mwv-camera" className="d-block text-white-50 py-1 text-decoration-none">MWV- camera</Link>
+            <div className="ms-4 mt-2">
+              <Link
+                to="/mwv-camera"
+                className="d-block text-white text-decoration-none"
+                style={{ opacity: 0.85 }}
+              >
+                MWV- camera
+              </Link>
             </div>
           </Collapse>
         </li>
 
+        <div style={dividerStyle}></div>
+
         {/* Geofence */}
         <li className="mb-2">
-          <div className="fw-semibold py-2" style={{ cursor: "pointer" }}>
+          <div className="fw-semibold py-2 d-flex align-items-center">
             <i className="bi bi-geo-alt me-2"></i> Geofence
-          </div>
-        </li>
-
-        {/* Tolls */}
-        <li className="mb-2">
-          <div className="fw-semibold py-2" style={{ cursor: "pointer" }}>
-            <i className="bi bi-coin me-2"></i> Tolls
           </div>
         </li>
       </ul>
