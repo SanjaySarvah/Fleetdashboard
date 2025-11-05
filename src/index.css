@@ -1,12 +1,19 @@
-/* Import Inter from Google Fonts (must be at the top) */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Set the default font for the app */
-:root {
+body {
+  margin: 90px;
   font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Font size utility classes */
+:root {
+  font-family: 'Inter', sans-serif;
+
+}
+
+
 .fonttext-10 {
   font-size: 10px;
 }
@@ -39,10 +46,4 @@
   font-size: 32px;
 }
 
-/* (Optional) Make font smooth and better rendering */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+

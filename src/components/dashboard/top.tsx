@@ -52,11 +52,12 @@ function Top() {
   ];
 
   return (
-    <div className="container-fluid py-2 px-3">
+    <div className="container-fluid  "style={{marginBottom:'20px'}} >
       <div className="stats-grid">
         {stats.map((item, index) => (
           <div key={index} className="stat-card">
             <div className="card-content">
+
 
               <div className="d-flex align-items-center justify-content-between mb-2">
                 <div
@@ -106,7 +107,7 @@ function Top() {
                 </div>
               </div>
 
-              {/* Bottom section: Title, Value, Subtitle */}
+           
               <div>
                 <h6 className="mb-1 fw-medium fonttext-13" style={{ color: '#666' }}>
                   {item.title}
@@ -123,76 +124,60 @@ function Top() {
         ))}
       </div>
 
-      <style>
-        {`
-          /* 🔹 Grid layout */
-          .stats-grid {
-            display: grid;
-            gap: 10px; /* reduced gap */
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-          }
+  <style>
+  {`
+    /* 🔹 Auto-fit grid layout */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 30px;
+      align-items: stretch;
+    }
 
-          /* 🔹 Card styling */
-          .stat-card {
-            background: white;
-            border-radius: 14px;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            height: 138px;
-            width: 100%;
-          }
+    /* 🔹 Card styling */
+    .stat-card {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      height: 138px;
+      display: flex;
+    }
 
-          .stat-card:hover {
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-            transform: translateY(-1px);
-          }
+    .stat-card:hover {
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+      transform: translateY(-1px);
+    }
 
-          .card-content {
-            padding: 12px 14px; /* reduced padding but preserved space */
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-          }
+    .card-content {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+    }
 
-          /* ✅ Desktop (1200px+): 5 cards per row */
-          @media (min-width: 1200px) {
-            .stats-grid {
-              grid-template-columns: repeat(5, 1fr);
-            }
-            .stat-card {
-              width: 210px;
-            }
-          }
+    /* ✅ Responsive fine-tuning */
+    @media (max-width: 767px) {
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        justify-items: start; /* Ensures last single card stays left */
+      }
 
-          /* ✅ Tablet (768px–1199px): 3 cards per row */
-          @media (min-width: 768px) and (max-width: 1199px) {
-            .stats-grid {
-              grid-template-columns: repeat(3, 1fr);
-            }
-          }
+      .stat-card {
+        width: 100%;
+        height: 134px;
+      }
 
-          /* ✅ Mobile (<768px): 2 cards per row */
-          @media (max-width: 767px) {
-            .stats-grid {
-              grid-template-columns: repeat(2, 1fr);
-              gap: 8px;
-            }
-            .stat-card {
-              height: 134px;
-            }
-            .card-content {
-              padding: 10px 12px;
-            }
-          }
+      .card-content {
+        padding: 10px 12px;
+      }
+    }
+  `}
+</style>
 
-          /* ✅ Small mobile (<480px): 1 card per row */
-          @media (max-width: 479px) {
-            .stats-grid {
-              grid-template-columns: 1fr;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 }
