@@ -53,9 +53,13 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
         {/* Dashboard */}
         <li className="mb-2">
           <div
-            className="d-flex justify-content-between align-items-center fw-semibold py-2"
+            className="d-flex justify-content-between align-items-center fw-semibold py-2 px-3"
             onClick={() => handleMenuToggle("dashboard")}
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              backgroundColor: "rgba(255, 255, 255, 0.15)",
+              borderRadius: "8px",
+            }}
           >
             <div>
               <i className="bi bi-speedometer2 me-2"></i> Dashboard
@@ -67,16 +71,18 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
             ></i>
           </div>
           <Collapse in={openMenu === "dashboard"}>
-            <div className="ms-4">
+            <div className="ms-4 mt-2">
               <Link
                 to="/dashboard-normal"
-                className="d-block text-white-50 py-1 text-decoration-none"
+                className="d-block text-white py-1 text-decoration-none ps-3"
+                style={{ opacity: 0.8 }}
               >
                 Dashboard - Normal
               </Link>
               <Link
                 to="/dashboard-metro"
-                className="d-block text-white-50 py-1 text-decoration-none"
+                className="d-block text-white py-1 text-decoration-none ps-3"
+                style={{ opacity: 0.8 }}
               >
                 Dashboard - Metro
               </Link>
@@ -187,11 +193,50 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
 
         {/* Camera */}
         <li className="mb-2">
-          <div className="fw-semibold py-2">
-            <i className="bi bi-camera-video me-2"></i> Camera
+          <div
+            className="d-flex justify-content-between align-items-center fw-semibold py-2"
+            onClick={() => handleMenuToggle("camera")}
+            style={{ cursor: "pointer" }}
+          >
+            <div>
+              <i className="bi bi-camera-video me-2"></i> Camera
+            </div>
+            <i
+              className={`bi ${
+                openMenu === "camera" ? "bi-chevron-up" : "bi-chevron-down"
+              }`}
+            ></i>
+          </div>
+          <Collapse in={openMenu === "camera"}>
+            <div className="ms-4">
+              <Link to="/mwv-camera" className="d-block text-white-50 py-1 text-decoration-none">MWV- camera</Link>
+            </div>
+          </Collapse>
+        </li>
+
+        {/* Geofence */}
+        <li className="mb-2">
+          <div className="fw-semibold py-2" style={{ cursor: "pointer" }}>
+            <i className="bi bi-geo-alt me-2"></i> Geofence
+          </div>
+        </li>
+
+        {/* Tolls */}
+        <li className="mb-2">
+          <div className="fw-semibold py-2" style={{ cursor: "pointer" }}>
+            <i className="bi bi-coin me-2"></i> Tolls
           </div>
         </li>
       </ul>
+
+      {/* Overlay for mobile */}
+      {open && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-md-none"
+          style={{ zIndex: 1040 }}
+          onClick={toggle}
+        />
+      )}
     </div>
   );
 };

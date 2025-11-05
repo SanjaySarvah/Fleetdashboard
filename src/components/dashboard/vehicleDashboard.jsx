@@ -11,7 +11,8 @@ import ClockIcon from '../dashboard/assests/icons/clock-regular-full 1 (1).svg';
 import BanIcon from '../dashboard/assests/icons/ban-regular-full 1.svg';
 import TruckImage from '../dashboard/assests/icons/delivery-truck_301719 1.svg';
 import Address from '../dashboard/assests/icons/Address.svg';
-import Settings from '../dashboard/assests/icons/Settings.svg';
+import Settings from '../dashboard/assests/icons/wrench-nodata.svg';
+import ParkedWrench from '../dashboard/assests/icons/wrench-light-full 1 Parking.svg';
 import Gauge from '../dashboard/assests/icons/gauge-simple-high-light-full 1.svg';
 import User from '../dashboard/assests/icons/user-light-full (1).svg';
 import NotCharging from '../dashboard/assests/icons/plug-regular-full.svg';
@@ -21,6 +22,7 @@ import Calender from '../dashboard/assests/icons/calendar-regular-full.svg';
 import Location from '../dashboard/assests/icons/arrow-progress-light-full 1.svg';
 import NoFuelIcon from '../dashboard/assests/icons/gas-pump-slash-light-full 1.svg';
 import FuelIcon from '../dashboard/assests/icons/gas-pump-regular-full.svg';
+import EllipsisIcon from '../dashboard/assests/icons/ellipsis-vertical-light-full 1.svg';
 
 
 function VehicleDashboard() {
@@ -200,12 +202,27 @@ function VehicleDashboard() {
                 {vehicles.map((v, i) => (
                     <div
                         key={i}
-                        className="bg-white border rounded-4 shadow-sm p-3 mb-3"
+                        className="bg-white rounded-4 shadow-sm p-3 mb-3"
                         style={{
                             fontSize: '14px',
-                            borderLeft: `5px solid ${v.statusColor}`,
+                           // borderLeft: `5px solid ${v.statusColor}`,
+                            position: 'relative',
                         }}
                     >
+                        {/* Ellipsis menu in top-right corner */}
+                        <img
+                            src={EllipsisIcon}
+                            alt="menu"
+                            style={{
+                                position: 'absolute',
+                                top: '12px',
+                                right: '12px',
+                                width: '20px',
+                                height: '20px',
+                                cursor: 'pointer',
+                            }}
+                        />
+
                         <div className="row align-items-start">
                             {/* 1️⃣ Vehicle Info */}
                             <div className="col-lg-3 d-flex">
@@ -262,15 +279,6 @@ function VehicleDashboard() {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
                             {/* 2️⃣ Address */}
                             <div className="col-lg-3 align-self-start" style={{ fontSize: '14px' }}>
                                 <div className="d-flex align-items-start">
@@ -282,14 +290,6 @@ function VehicleDashboard() {
                                     <span>{v.address}</span>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
                             {/* 3️⃣ Status (Top) + ODO / ParkedTime (Bottom) */}
                             <div
                                 className="col-lg-3 d-flex flex-column justify-content-between"
@@ -301,11 +301,20 @@ function VehicleDashboard() {
                             >
                                 {/* 🔹 Status — top aligned */}
                                 <div className="d-flex align-items-start">
-                                    <img
-                                        src={Settings}
-                                        alt="status"
-                                        style={{ width: '16px', height: '16px', marginRight: '6px' }}
-                                    />
+                                    {v.status === 'PARKED' && (
+                                        <img
+                                            src={ParkedWrench}
+                                            alt="status"
+                                            style={{ width: '16px', height: '16px', marginRight: '6px' }}
+                                        />
+                                    )}
+                                    {v.status === 'No data' && (
+                                        <img
+                                            src={Settings}
+                                            alt="status"
+                                            style={{ width: '16px', height: '16px', marginRight: '6px' }}
+                                        />
+                                    )}
                                     <span
                                         className=""
                                         style={{ color: v.statusColor, textTransform: 'uppercase', fontSize: '14px' }}
@@ -365,20 +374,6 @@ function VehicleDashboard() {
                                 </div>
                             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <div className="col-lg-3 d-flex flex-column">
                                 {/* IGN badge at the top */}
                                 <span
@@ -387,10 +382,12 @@ function VehicleDashboard() {
                                         backgroundColor: v.ignition === 'ON' ? '#27AE60' : '#EF4343',
                                         fontSize: '14px',
                                         fontWeight: 'normal',
+                                        padding: '8px 12px',
                                     }}
                                 >
                                     IGN {v.ignition}
                                 </span>
+                              
 
                                 {/* Other badges in one flex row */}
                                 <div className="d-flex flex-wrap gap-2" style={{ marginTop: '80px' }}>
@@ -410,43 +407,43 @@ function VehicleDashboard() {
                                         {v.subBadge}
                                     </span>
 
-                            
 
 
 
-<span
-  className="badge d-flex align-items-center"
-  style={{
-    backgroundColor:
-      v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
-        ? '#e9ecef'
-        : '#e9ecef',
-    color:
-      v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
-        ? '#6c757d'
-        : '#6c757d',
-  }}
->
-  <img
-    src={
-      v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
-        ? FuelIcon
-        : NoFuelIcon
-    }
-    alt={
-      v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
-        ? 'Fuel Available'
-        : 'No Fuel'
-    }
-    style={{ width: '16px', height: '16px', marginRight: '4px' }}
-  />
-  {v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
-    ? v.fuel
-    : ''}
-</span>
 
-                                          
-                                 
+                                    <span
+                                        className="badge d-flex align-items-center"
+                                        style={{
+                                            backgroundColor:
+                                                v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
+                                                    ? '#e9ecef'
+                                                    : '#e9ecef',
+                                            color:
+                                                v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
+                                                    ? '#6c757d'
+                                                    : '#6c757d',
+                                        }}
+                                    >
+                                        <img
+                                            src={
+                                                v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
+                                                    ? FuelIcon
+                                                    : NoFuelIcon
+                                            }
+                                            alt={
+                                                v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
+                                                    ? 'Fuel Available'
+                                                    : 'No Fuel'
+                                            }
+                                            style={{ width: '16px', height: '16px', marginRight: '4px' }}
+                                        />
+                                        {v.fuel !== null && v.fuel !== undefined && v.fuel !== ''
+                                            ? v.fuel
+                                            : ''}
+                                    </span>
+
+
+
 
                                     {v.distance && (
                                         <span className="badge bg-light text-secondary border">
