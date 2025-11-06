@@ -253,21 +253,50 @@ function VehicleDashboard() {
                     />
                 </div>
 
+<div className="col-md-4 fonttext-14 position-relative">
+  <select
+    className="form-select rounded-3 pe-5"
+    value={selectedStatus}
+    onChange={handleStatusChange}
+  >
+    <option value="All vehicles" style={{ color: '#6F6F6F', fontWeight: 'normal' }}>All vehicles</option>
+    <option value="Moving">Moving</option>
+    <option value="Idle">Idle</option>
+    <option value="Parked">Parked</option>
+    <option value="No data">No data</option>
+    <option value="Disabled">Disabled</option>
+  </select>
 
-                <div className="col-md-4 fonttext-14 position-relative">
-                    <select
-                        className="form-select custom-select-dropdown rounded-3"
-                        value={selectedStatus}
-                        onChange={handleStatusChange}
-                    >
-                        <option value="All vehicles" style={{ color: '#6F6F6F', fontWeight: 'normal' }}>All vehicles</option>
-                        <option value="Moving">Moving</option>
-                        <option value="Idle">Idle</option>
-                        <option value="Parked">Parked</option>
-                        <option value="No data">No data</option>
-                        <option value="Disabled">Disabled</option>
-                    </select>
-                </div>
+  {/* 🔹 Vertical line + Right arrow */}
+  <div
+    className="position-absolute d-flex align-items-center"
+    style={{
+      right: '12px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      height: '60%',
+    }}
+  >
+    <div
+      style={{
+        width: '1px',
+        height: '100%',
+        backgroundColor: '#D0D0D0',
+        marginRight: '30px',
+      }}
+    ></div>
+    <i
+      className="bi bi-chevron-bottom"
+      style={{
+        color: '#6F6F6F',
+        fontSize: '14px',
+        fontWeight: 'normal',
+      }}
+    ></i>
+  </div>
+</div>
+
+
 
             </div>
 
