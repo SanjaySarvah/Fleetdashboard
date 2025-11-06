@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <main
         className="mt-3"
         style={{
-          padding: "20px",        // ✅ Global inline margin
+                 // ✅ Global inline margin
             // ✅ Keep header offset if needed (adjust)
         }}
       >

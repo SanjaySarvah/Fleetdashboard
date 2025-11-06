@@ -52,7 +52,7 @@ function Top() {
   ];
 
   return (
-    <div className="container-fluid  "style={{marginBottom:'20px'}} >
+    <div className="container-fluid pt-3 "style={{paddingBottom:'20px',padding: "0 20px", backgroundColor: '#FAFAFA'}} >
       <div className="stats-grid">
         {stats.map((item, index) => (
           <div key={index} className="stat-card">
@@ -140,7 +140,7 @@ function Top() {
       border-radius: 14px;
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
-      height: 138px;
+      height: 144px;
       display: flex;
     }
 

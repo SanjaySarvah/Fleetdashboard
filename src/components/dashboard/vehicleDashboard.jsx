@@ -202,14 +202,14 @@ function VehicleDashboard() {
     };
 
     return (
-        <div className="container-fluid py-3 px-3">
+        <div className="container-fluid py-3  " style={{backgroundColor: '#FAFAFA',padding: "0 20px"}}>
             {/* 🔍 Search Row */}
-            <div className="row mb-3 g-2">
+            <div className="row mb-3 g-5 pt-3">
                 <div className="col-md-4">
                     <div className="input-group">
                         <span
                             className="input-group-text bg-white border-end-0 rounded-start-3"
-                            style={{ paddingRight: '6px', paddingLeft: '10px' }} // 🔹 reduced spacing
+                            style={{ paddingRight: '6px', paddingLeft: '10px', paddingTop:'5px' , paddingBottom:'5px'}} // 🔹 reduced spacing
                         >
                             <i className="bi bi-search text-secondary" style={{ fontSize: '14px' }}></i>
                         </span>
@@ -219,7 +219,8 @@ function VehicleDashboard() {
                             placeholder="Search by vehicle number, category etc"
                             style={{
                                 color: '#6F6F6F',
-                                paddingLeft: '4px', // 🔹 reduce gap between icon and text
+                                paddingLeft: '4px',
+                                  height: '48px', // 🔹 reduce gap between icon and text
                             }}
                             value={searchTerm1}
                             onChange={handleSearch1Change}
@@ -233,7 +234,7 @@ function VehicleDashboard() {
                         className="bi bi-search position-absolute"
                         style={{
                             top: '50%',
-                            left: '13px', // 🔹 slightly closer to input edge
+                            left: '33px', // 🔹 slightly closer to input edge
                             transform: 'translateY(-50%)',
                             color: '#6F6F6F',
                             fontSize: '14px',
@@ -246,7 +247,7 @@ function VehicleDashboard() {
                         style={{
                             color: '#6F6F6F',
                             paddingLeft: '32px', // 🔹 tighter gap between icon and text
-                            height: '40px', // optional: consistent height with other fields
+                            height: '48px', // optional: consistent height with other fields
                         }}
                         value={searchTerm2}
                         onChange={handleSearch2Change}
@@ -257,6 +258,7 @@ function VehicleDashboard() {
   <select
     className="form-select rounded-3 pe-5"
     value={selectedStatus}
+    style={{  height: '48px',}}
     onChange={handleStatusChange}
   >
     <option value="All vehicles" style={{ color: '#6F6F6F', fontWeight: 'normal' }}>All vehicles</option>
@@ -271,7 +273,7 @@ function VehicleDashboard() {
   <div
     className="position-absolute d-flex align-items-center"
     style={{
-      right: '12px',
+      right: '26px',
       top: '50%',
       transform: 'translateY(-50%)',
       height: '60%',
@@ -301,7 +303,7 @@ function VehicleDashboard() {
             </div>
 
             {/* 🚚 Filter Chips */}
-            <div className="d-flex flex-wrap align-items-center gap-3 mb-4 filter-chips-container">
+            <div className="d-flex flex-wrap align-items-center gap-4 mb-4 filter-chips-container">
                 {updatedFilters.map((f, i) => (
                     <div
                         key={i}
@@ -356,7 +358,7 @@ function VehicleDashboard() {
 
 
             {/* 🚛 Vehicle Cards */}
-            <div className="container-fluid">
+            <div className="container-fluid" style={{ paddingLeft: '0px', paddingRight: '0px'   }}>
                 {filteredVehicles.length > 0 ? (
                     filteredVehicles.map((v, i) => (
                         <div
