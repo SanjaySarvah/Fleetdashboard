@@ -49,23 +49,40 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
           paddingTop: "20px",
         }}
       >
-        {/* 🔍 Search */}
-        <div className="px-3 mb-3">
-          <div
-            className="d-flex align-items-center rounded-4 px-3 py-2"
-            style={{ backgroundColor: "#fff" }}
+        {/* 🔍 Search & Close Icon Container */}
+        <div className="position-relative">
+          {/* Close Icon - Only visible in mobile view */}
+          <button
+            className="btn btn-link text-white p-0 position-absolute end-0 me-3 d-md-none"
+            onClick={toggle}
+            style={{
+              top: "-10px",
+              zIndex: 1060,
+              textDecoration: "none",
+              fontSize: "1.5rem",
+            }}
           >
-            <i className="bi bi-search text-secondary me-2"></i>
-            <input
-              type="text"
-              className="form-control border-0 shadow-none p-0"
-              placeholder="Search"
-              style={{
-                background: "transparent",
-                fontSize: 15,
-                color: "#333",
-              }}
-            />
+            <i className="bi bi-x-lg"></i>
+          </button>
+
+          {/* Search */}
+          <div className="px-3 mb-3 mt-5">
+            <div
+              className="d-flex align-items-center rounded-4 px-3 py-2"
+              style={{ backgroundColor: "#fff" }}
+            >
+              <i className="bi bi-search text-secondary me-2"></i>
+              <input
+                type="text"
+                className="form-control border-0 shadow-none p-0"
+                placeholder="Search"
+                style={{
+                  background: "transparent",
+                  fontSize: 15,
+                  color: "#333",
+                }}
+              />
+            </div>
           </div>
         </div>
 
@@ -94,6 +111,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/dashboard-normal"
                   className="d-block text-white text-decoration-none mb-2"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()} // Close sidebar on mobile when link clicked
                 >
                   Dashboard- Normal
                 </Link>
@@ -101,6 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/dashboard-metro"
                   className="d-block text-white text-decoration-none"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()} // Close sidebar on mobile when link clicked
                 >
                   Dashboard- Metro
                 </Link>
@@ -152,6 +171,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/reports-dashboard"
                   className="d-block text-white text-decoration-none mb-1"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   Reports Dashboard
                 </Link>
@@ -159,6 +179,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/reports-km"
                   className="d-block text-white text-decoration-none mb-1"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   Reports- Current KM
                 </Link>
@@ -166,6 +187,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/reports-trip"
                   className="d-block text-white text-decoration-none mb-1"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   Reports- Trip
                 </Link>
@@ -173,6 +195,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/reports-fuel"
                   className="d-block text-white text-decoration-none"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   Reports- Fuel
                 </Link>
@@ -204,6 +227,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/driver-dashboard"
                   className="d-block text-white text-decoration-none mb-1"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   Driver Dashboard
                 </Link>
@@ -211,6 +235,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/attendance-reports"
                   className="d-block text-white text-decoration-none"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   Attendance Reports
                 </Link>
@@ -242,6 +267,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/routes-dashboard"
                   className="d-block text-white text-decoration-none"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   Routes Dashboard
                 </Link>
@@ -273,6 +299,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, toggle }) => {
                   to="/mwv-camera"
                   className="d-block text-white text-decoration-none"
                   style={{ opacity: 0.85 }}
+                  onClick={() => window.innerWidth < 768 && toggle()}
                 >
                   MWV- camera
                 </Link>

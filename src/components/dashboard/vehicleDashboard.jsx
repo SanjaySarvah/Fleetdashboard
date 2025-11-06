@@ -202,8 +202,8 @@ function VehicleDashboard() {
     };
 
     return (
-        <div className="container-fluid py-3  " style={{backgroundColor: '#FAFAFA',padding: "0 20px"}}>
-            {/* 🔍 Search Row */}
+        <div className="container-fluid py-3  " style={{backgroundColor: '#FAFAFA',padding: "0 35px"}}>
+       
             <div className="row mb-3 g-5 pt-3">
                 <div className="col-md-4">
                     <div className="input-group">
@@ -302,7 +302,6 @@ function VehicleDashboard() {
 
             </div>
 
-            {/* 🚚 Filter Chips */}
             <div className="d-flex flex-wrap align-items-center gap-4 mb-4 filter-chips-container">
                 {updatedFilters.map((f, i) => (
                     <div
@@ -357,7 +356,6 @@ function VehicleDashboard() {
             </div>
 
 
-            {/* 🚛 Vehicle Cards */}
             <div className="container-fluid" style={{ paddingLeft: '0px', paddingRight: '0px'   }}>
                 {filteredVehicles.length > 0 ? (
                     filteredVehicles.map((v, i) => (
