@@ -206,28 +206,57 @@ function VehicleDashboard() {
             {/* 🔍 Search Row */}
             <div className="row mb-3 g-2">
                 <div className="col-md-4">
-                    <input
-                        type="text"
-                        className="form-control rounded-3 fonttext-14"
-                        placeholder="Search by vehicle number, category etc"
-                        style={{ color: '#6F6F6F' }}
-                        value={searchTerm1}
-                        onChange={handleSearch1Change}
-                    />
+                    <div className="input-group">
+                        <span
+                            className="input-group-text bg-white border-end-0 rounded-start-3"
+                            style={{ paddingRight: '6px', paddingLeft: '10px' }} // 🔹 reduced spacing
+                        >
+                            <i className="bi bi-search text-secondary" style={{ fontSize: '14px' }}></i>
+                        </span>
+                        <input
+                            type="text"
+                            className="form-control rounded-end-3 fonttext-14 border-start-0"
+                            placeholder="Search by vehicle number, category etc"
+                            style={{
+                                color: '#6F6F6F',
+                                paddingLeft: '4px', // 🔹 reduce gap between icon and text
+                            }}
+                            value={searchTerm1}
+                            onChange={handleSearch1Change}
+                        />
+                    </div>
                 </div>
-                <div className="col-md-4">
+
+
+                <div className="col-md-4 position-relative">
+                    <i
+                        className="bi bi-search position-absolute"
+                        style={{
+                            top: '50%',
+                            left: '13px', // 🔹 slightly closer to input edge
+                            transform: 'translateY(-50%)',
+                            color: '#6F6F6F',
+                            fontSize: '14px',
+                        }}
+                    ></i>
                     <input
                         type="text"
                         className="form-control rounded-3 fonttext-14"
                         placeholder="Search by Area, depot, model"
-                        style={{ color: '#6F6F6F' }}
+                        style={{
+                            color: '#6F6F6F',
+                            paddingLeft: '32px', // 🔹 tighter gap between icon and text
+                            height: '40px', // optional: consistent height with other fields
+                        }}
                         value={searchTerm2}
                         onChange={handleSearch2Change}
                     />
                 </div>
-                <div className="col-md-4 fonttext-14">
+
+
+                <div className="col-md-4 fonttext-14 position-relative">
                     <select
-                        className="form-select rounded-3"
+                        className="form-select custom-select-dropdown rounded-3"
                         value={selectedStatus}
                         onChange={handleStatusChange}
                     >
@@ -239,6 +268,7 @@ function VehicleDashboard() {
                         <option value="Disabled">Disabled</option>
                     </select>
                 </div>
+
             </div>
 
             {/* 🚚 Filter Chips */}
@@ -296,257 +326,257 @@ function VehicleDashboard() {
             </div>
 
 
-        {/* 🚛 Vehicle Cards */}
-<div className="container-fluid">
-  {filteredVehicles.length > 0 ? (
-    filteredVehicles.map((v, i) => (
-      <div
-        key={i}
-        className="bg-white rounded-4 shadow-sm p-3 mb-3 vehicle-card"
-        style={{
-          fontSize: '14px',
-          position: 'relative',
-        }}
-      >
-        {/* Ellipsis menu in top-right corner */}
-        <img
-          src={EllipsisIcon}
-          alt="menu"
-          style={{
-            position: 'absolute',
-            top: '12px',
-            right: '12px',
-            width: '20px',
-            height: '20px',
-            cursor: 'pointer',
-          }}
-        />
+            {/* 🚛 Vehicle Cards */}
+            <div className="container-fluid">
+                {filteredVehicles.length > 0 ? (
+                    filteredVehicles.map((v, i) => (
+                        <div
+                            key={i}
+                            className="bg-white rounded-4 shadow-sm p-3 mb-3 vehicle-card"
+                            style={{
+                                fontSize: '14px',
+                                position: 'relative',
+                            }}
+                        >
+                            {/* Ellipsis menu in top-right corner */}
+                            <img
+                                src={EllipsisIcon}
+                                alt="menu"
+                                style={{
+                                    position: 'absolute',
+                                    top: '12px',
+                                    right: '12px',
+                                    width: '20px',
+                                    height: '20px',
+                                    cursor: 'pointer',
+                                }}
+                            />
 
-        <div className="row align-items-start">
-          {/* 1️⃣ Vehicle Info */}
-          <div className="col-lg-3 d-flex">
-            <div className="text-center me-3">
-              <div
-                className="rounded-3 d-flex align-items-center justify-content-center"
-                style={{
-                  background: '#F3F7FF',
-                  width: 80,
-                  height: 80,
-                }}
-              >
-                <img
-                  src={TruckImage}
-                  alt={v.type}
-                  style={{ width: '60px', height: '60px' }}
-                />
-              </div>
-              <div className="small text-muted mt-1">{v.type}</div>
+                            <div className="row align-items-start">
+                                {/* 1️⃣ Vehicle Info */}
+                                <div className="col-lg-3 d-flex">
+                                    <div className="text-center me-3">
+                                        <div
+                                            className="rounded-3 d-flex align-items-center justify-content-center"
+                                            style={{
+                                                background: '#F3F7FF',
+                                                width: 80,
+                                                height: 80,
+                                            }}
+                                        >
+                                            <img
+                                                src={TruckImage}
+                                                alt={v.type}
+                                                style={{ width: '60px', height: '60px' }}
+                                            />
+                                        </div>
+                                        <div className="mt-1 " style={{}}>{v.type}</div>
+                                    </div>
+                                    <div className="flex-grow-1 ms-2">
+                                        <h6 className="fw-bold mb-1">{v.vehicleNo}</h6>
+                                        <span
+                                            className="badge"
+                                            style={{
+                                                backgroundColor: '#F1F5F9',
+                                                color: '#525252',
+                                                fontSize: '14px',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            {v.category}
+                                        </span>
+                                        <div className="d-flex align-items-center mt-1">
+                                            <img
+                                                src={User}
+                                                alt="driver"
+                                                style={{ width: '16px', height: '16px', marginRight: '4px' }}
+                                            />
+                                            <span>{v.driver}</span>
+                                        </div>
+                                        <div className="d-flex align-items-center">
+                                            <img
+                                                src={Call}
+                                                alt="phone"
+                                                style={{ width: '16px', height: '16px', marginRight: '4px' }}
+                                            />
+                                            {v.phone}
+                                        </div>
+                                        <div className="d-flex flex-wrap gap-1 mt-3">
+                                            <span className="badge text-primary" style={{ backgroundColor: '#E5EEFF', fontSize: '14px', fontWeight: 'normal' }}>Area</span>
+                                            <span className="badge text-primary" style={{ backgroundColor: '#E5EEFF', fontSize: '14px', fontWeight: 'normal' }}>Depot</span>
+                                            <span className="badge text-primary" style={{ backgroundColor: '#E5EEFF', fontSize: '14px', fontWeight: 'normal' }}>Model</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* 2️⃣ Address */}
+                                <div className="col-lg-3 align-self-start" style={{ fontSize: '14px' }}>
+                                    <div className="d-flex align-items-start">
+                                        <img
+                                            src={Address}
+                                            alt="address"
+                                            style={{ width: '16px', height: '16px', marginRight: '8px', marginTop: '2px' }}
+                                        />
+                                        <span>{v.address}</span>
+                                    </div>
+                                </div>
+
+                                {/* 3️⃣ Status (Top) + ODO / ParkedTime (Bottom) */}
+                                <div
+                                    className="col-lg-3 d-flex flex-column justify-content-between"
+                                    style={{
+                                        fontSize: '14px',
+                                        height: '100%',
+                                        minHeight: '100%',
+                                    }}
+                                >
+                                    {/* 🔹 Status — top aligned */}
+                                    <div className="d-flex align-items-start">
+                                        {v.status === 'PARKED' && (
+                                            <img
+                                                src={ParkedWrench}
+                                                alt="status"
+                                                style={{ width: '16px', height: '16px', marginRight: '6px', marginTop: '2px' }}
+                                            />
+                                        )}
+                                        {v.status === 'No data' && (
+                                            <img
+                                                src={Settings}
+                                                alt="status"
+                                                style={{ width: '16px', height: '16px', marginRight: '6px', marginTop: '2px' }}
+                                            />
+                                        )}
+                                        <span
+                                            className=""
+                                            style={{ color: v.statusColor, textTransform: 'uppercase', fontSize: '14px' }}
+                                        >
+                                            {v.status}:
+                                        </span>
+                                        <span className="fw-bold ms-1" style={{ color: v.statusColor }}>
+                                            {v.statusText}
+                                        </span>
+                                        <span style={{ paddingLeft: '4px', color: v.statusColor }}>from</span>
+                                        <span className="fw-bold ms-1" style={{ color: v.statusColor }}>
+                                            {v.statusTime}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        {v.parkedTime && (
+                                            <span className="badge " style={{ fontSize: '14px', backgroundColor: '#F1F5F9', color: '#525252', fontWeight: 'normal', marginTop: '4px' }}>
+                                                {v.parkedTime}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* 🔹 Bottom badges — pushed to last bottom */}
+                                    <div
+                                        className="d-flex align-items-center flex-wrap gap-2 justify-content-start"
+                                        style={{
+                                            marginTop: '55px',
+                                            paddingTop: '6px',
+                                            fontSize: '14px',
+                                        }}
+                                    >
+                                        {v.odo && (
+                                            <span
+                                                className="badge"
+                                                style={{ fontSize: '14px', backgroundColor: '#0F1828', color: '#ffffffff', fontWeight: 'normal' }}
+                                            >
+                                                <img
+                                                    src={Gauge}
+                                                    alt="ODO"
+                                                    style={{ width: '16px', height: '16px', marginRight: '4px' }}
+                                                />
+                                                ODO: {v.odo}
+                                            </span>
+                                        )}
+                                        {v.parkedTime && (
+                                            <span className="badge " style={{ fontSize: '14px', backgroundColor: '#F1F5F9', color: '#525252', fontWeight: 'normal' }}>
+                                                <img
+                                                    src={Calender}
+                                                    alt="ODO"
+                                                    style={{ width: '16px', height: '16px', marginRight: '4px' }}
+                                                />
+                                                {v.crossedkm}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* 4️⃣ IGN + Sub Badges */}
+                                <div className="col-lg-3 d-flex flex-column">
+                                    {/* IGN badge at the top */}
+                                    <span
+                                        className="badge text-white mb-2 align-self-start"
+                                        style={{
+                                            backgroundColor: v.ignition === 'ON' ? '#27AE60' : '#EF4343',
+                                            fontSize: '14px',
+                                            fontWeight: 'normal',
+                                            padding: '8px 12px',
+                                        }}
+                                    >
+                                        IGN {v.ignition}
+                                    </span>
+
+                                    {/* Other badges */}
+                                    <div className="d-flex flex-wrap gap-2" style={{ marginTop: '80px', fontSize: '14px' }}>
+                                        <span
+                                            className="badge d-flex align-items-center"
+                                            style={{
+                                                backgroundColor: v.subBadge === 'Charging' ? 'rgba(5,165,63,0.15)' : '#e9ecef',
+                                                color: v.subBadge === 'Charging' ? '#05A53F' : '#6c757d',
+                                            }}
+                                        >
+                                            <img
+                                                src={v.subBadge === 'Charging' ? Charging : NotCharging}
+                                                alt={v.subBadge || 'Not Charging'}
+                                                style={{ width: '16px', height: '16px', marginRight: '4px' }}
+                                            />
+                                            <span style={{ fontSize: '14px', fontWeight: 'normal' }}>{v.subBadge}</span>
+                                        </span>
+
+                                        <span
+                                            className="badge d-flex align-items-center"
+                                            style={{
+                                                backgroundColor: v.fuel ? '#F1F5F9' : '#e9ecef',
+                                                color: '#6c757d',
+                                            }}
+                                        >
+                                            <img
+                                                src={v.fuel ? FuelIcon : NoFuelIcon}
+                                                alt={v.fuel ? 'Fuel Available' : 'No Fuel'}
+                                                style={{ width: '16px', height: '16px', marginRight: '4px' }}
+                                            />
+                                            <span style={{ fontSize: '14px', fontWeight: 'normal' }}>
+                                                {v.fuel || ''}
+                                            </span>
+                                        </span>
+
+                                        {v.distance && (
+                                            <span className="badge" style={{ backgroundColor: '#F1F5F9', color: '#6c757d', fontWeight: 'normal' }}>
+                                                <img
+                                                    src={Location}
+                                                    alt="status"
+                                                    style={{ width: '16px', height: '16px', marginRight: '6px' }}
+                                                />
+                                                <span style={{ fontSize: '14px', fontWeight: 'normal', marginTop: '20px' }}> {v.distance}</span>
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div className="text-center py-5">
+                        <p className="text-muted">No vehicles found matching your search criteria.</p>
+                    </div>
+                )}
             </div>
-            <div className="flex-grow-1 ms-2">
-              <h6 className="fw-bold mb-1">{v.vehicleNo}</h6>
-              <span
-                className="badge"
-                style={{
-                  backgroundColor: '#F1F5F9',
-                  color: '#525252',
-                  fontSize: '14px',
-                  fontWeight: 'normal',
-                }}
-              >
-                {v.category}
-              </span>
-              <div className="d-flex align-items-center mt-1">
-                <img
-                  src={User}
-                  alt="driver"
-                  style={{ width: '16px', height: '16px', marginRight: '4px' }}
-                />
-                <span>{v.driver}</span>
-              </div>
-              <div className="d-flex align-items-center">
-                <img
-                  src={Call}
-                  alt="phone"
-                  style={{ width: '16px', height: '16px', marginRight: '4px' }}
-                />
-                {v.phone}
-              </div>
-              <div className="d-flex flex-wrap gap-1 mt-3">
-                <span className="badge text-primary" style={{ backgroundColor: '#E5EEFF', fontSize: '14px', fontWeight: 'normal' }}>Area</span>
-                <span className="badge text-primary" style={{ backgroundColor: '#E5EEFF', fontSize: '14px', fontWeight: 'normal' }}>Depot</span>
-                <span className="badge text-primary" style={{ backgroundColor: '#E5EEFF', fontSize: '14px', fontWeight: 'normal' }}>Model</span>
-              </div>
-            </div>
-          </div>
 
-          {/* 2️⃣ Address */}
-          <div className="col-lg-3 align-self-start" style={{ fontSize: '14px' }}>
-            <div className="d-flex align-items-start">
-              <img
-                src={Address}
-                alt="address"
-                style={{ width: '16px', height: '16px', marginRight: '8px', marginTop: '2px' }}
-              />
-              <span>{v.address}</span>
-            </div>
-          </div>
-
-          {/* 3️⃣ Status (Top) + ODO / ParkedTime (Bottom) */}
-          <div
-            className="col-lg-3 d-flex flex-column justify-content-between"
-            style={{
-              fontSize: '14px',
-              height: '100%',
-              minHeight: '100%',
-            }}
-          >
-            {/* 🔹 Status — top aligned */}
-            <div className="d-flex align-items-start">
-              {v.status === 'PARKED' && (
-                <img
-                  src={ParkedWrench}
-                  alt="status"
-                  style={{ width: '16px', height: '16px', marginRight: '6px', marginTop: '2px' }}
-                />
-              )}
-              {v.status === 'No data' && (
-                <img
-                  src={Settings}
-                  alt="status"
-                  style={{ width: '16px', height: '16px', marginRight: '6px', marginTop: '2px' }}
-                />
-              )}
-              <span
-                className=""
-                style={{ color: v.statusColor, textTransform: 'uppercase', fontSize: '14px' }}
-              >
-                {v.status}:
-              </span>
-              <span className="fw-bold ms-1" style={{ color: v.statusColor }}>
-                {v.statusText}
-              </span>
-              <span style={{ paddingLeft: '4px', color: v.statusColor }}>from</span>
-              <span className="fw-bold ms-1" style={{ color: v.statusColor }}>
-                {v.statusTime}
-              </span>
-            </div>
-            <div>
-              {v.parkedTime && (
-                <span className="badge " style={{ fontSize: '14px', backgroundColor: '#F1F5F9', color: '#525252', fontWeight: 'normal', marginTop: '4px' }}>
-                  {v.parkedTime}
-                </span>
-              )}
-            </div>
-
-            {/* 🔹 Bottom badges — pushed to last bottom */}
-            <div
-              className="d-flex align-items-center flex-wrap gap-2 justify-content-start"
-              style={{
-                marginTop: '55px',
-                paddingTop: '6px',
-                fontSize: '14px',
-              }}
-            >
-              {v.odo && (
-                <span
-                  className="badge"
-                  style={{ fontSize: '14px', backgroundColor: '#0F1828', color: '#ffffffff', fontWeight: 'normal' }}
-                >
-                  <img
-                    src={Gauge}
-                    alt="ODO"
-                    style={{ width: '16px', height: '16px', marginRight: '4px' }}
-                  />
-                  ODO: {v.odo}
-                </span>
-              )}
-              {v.parkedTime && (
-                <span className="badge " style={{ fontSize: '14px', backgroundColor: '#F1F5F9', color: '#525252', fontWeight: 'normal' }}>
-                  <img
-                    src={Calender}
-                    alt="ODO"
-                    style={{ width: '16px', height: '16px', marginRight: '4px' }}
-                  />
-                  {v.crossedkm}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* 4️⃣ IGN + Sub Badges */}
-          <div className="col-lg-3 d-flex flex-column">
-            {/* IGN badge at the top */}
-            <span
-              className="badge text-white mb-2 align-self-start"
-              style={{
-                backgroundColor: v.ignition === 'ON' ? '#27AE60' : '#EF4343',
-                fontSize: '14px',
-                fontWeight: 'normal',
-                padding: '8px 12px',
-              }}
-            >
-              IGN {v.ignition}
-            </span>
-
-            {/* Other badges */}
-            <div className="d-flex flex-wrap gap-2" style={{ marginTop: '80px' }}>
-              <span
-                className="badge d-flex align-items-center"
-                style={{
-                  backgroundColor: v.subBadge === 'Charging' ? 'rgba(5,165,63,0.15)' : '#e9ecef',
-                  color: v.subBadge === 'Charging' ? '#05A53F' : '#6c757d',
-                }}
-              >
-                <img
-                  src={v.subBadge === 'Charging' ? Charging : NotCharging}
-                  alt={v.subBadge || 'Not Charging'}
-                  style={{ width: '16px', height: '16px', marginRight: '4px' }}
-                />
-                {v.subBadge}
-              </span>
-
-              <span
-                className="badge d-flex align-items-center"
-                style={{
-                  backgroundColor: v.fuel ? '#F1F5F9' : '#e9ecef',
-                  color: '#6c757d',
-                }}
-              >
-                <img
-                  src={v.fuel ? FuelIcon : NoFuelIcon}
-                  alt={v.fuel ? 'Fuel Available' : 'No Fuel'}
-                  style={{ width: '16px', height: '16px', marginRight: '4px' }}
-                />
-                <span style={{ fontSize: '14px', fontWeight: 'normal' }}>
-                  {v.fuel || ''}
-                </span>
-              </span>
-
-              {v.distance && (
-                <span className="badge" style={{ backgroundColor: '#F1F5F9', color: '#6c757d', fontWeight: 'normal' }}>
-                  <img
-                    src={Location}
-                    alt="status"
-                    style={{ width: '16px', height: '16px', marginRight: '6px' }}
-                  />
-                  <span style={{ fontSize: '14px', fontWeight: 'normal', marginTop: '20px' }}> {v.distance}</span>
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    ))
-  ) : (
-    <div className="text-center py-5">
-      <p className="text-muted">No vehicles found matching your search criteria.</p>
-    </div>
-  )}
-</div>
-
-{/* 🚀 Mobile-Only Responsive Styles */}
-<style>
-{`
+            {/* 🚀 Mobile-Only Responsive Styles */}
+            <style>
+                {`
 @media (max-width: 768px) {
   .vehicle-card {
     padding: 16px !important;
@@ -592,8 +622,11 @@ function VehicleDashboard() {
     height: 14px !important;
   }
 }
+
+
+
 `}
-</style>
+            </style>
 
         </div>
     );
