@@ -1,25 +1,33 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
+import HeaderDesktop from "./components/HeaderDesktop";
+import MobileHeader from "./components/MobileHeader";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import DealerLicensePortal from "./pages/DealerLicensePortal";
+import GroupManagement from "./pages/GroupManagement";
 import "./index.css";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Header />
-      <main
-        className="mt-3"
-        style={{
-                 // ✅ Global inline margin
-            // ✅ Keep header offset if needed (adjust)
-        }}
-      >
+      {/* Desktop Header */}
+      <div className="d-none d-md-block">
+        <HeaderDesktop />
+      </div>
+
+      {/* Mobile Header */}
+      <div className="d-block d-md-none">
+        <MobileHeader />
+      </div>
+
+      <main className="mt-3">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/reports" element={<Reports />} />
+          <Route path="/driverlicenseportal" element={<DealerLicensePortal />} />
+           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/group-management" element={<GroupManagement/>} />
         </Routes>
       </main>
     </Router>
