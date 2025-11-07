@@ -123,7 +123,7 @@ export default function GroupManagement() {
     ];
 
     return (
-        <div className="p-4 max-w-7xl mx-auto font-sans">
+        <div className="main-content-padding" >
             {/* Header */}
             <div className="d-flex justify-content-between align-items-center mb-1">
                 <div>

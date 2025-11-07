@@ -46,4 +46,27 @@ body {
   font-size: 32px;
 }
 
+.main-content {
+  margin-left: 70px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
+
+/* index.css */
+.main-content-padding {
+  padding: 0 35px; /* Default for desktop */
+}
+
+/* Mobile view adjustment */
+@media (max-width: 768px) {
+  .main-content-padding {
+    padding: 0 10px;
+  }
+}
+
+
 

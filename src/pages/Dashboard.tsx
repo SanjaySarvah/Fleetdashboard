@@ -5,7 +5,7 @@ import VehicleDashboard from '../components/dashboard/vehicleDashboard'
 
 const Dashboard: React.FC = () => {
   return (
-    <div>
+    <div className='main-content-padding' style={{backgroundColor: '#FAFAFA'}}>
       <Top />
       <VehicleDashboard />
     </div>

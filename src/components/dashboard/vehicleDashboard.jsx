@@ -202,7 +202,7 @@ function VehicleDashboard() {
     };
 
     return (
-        <div className="container-fluid py-3  " style={{backgroundColor: '#FAFAFA',padding: "0 35px"}}>
+        <div className="container-fluid py-3 " style={{backgroundColor: '#FAFAFA'}}>
        
             <div className="row mb-3 g-5 pt-3">
                 <div className="col-md-4">

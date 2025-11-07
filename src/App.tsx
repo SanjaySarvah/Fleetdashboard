@@ -5,7 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import DealerLicensePortal from "./pages/DealerLicensePortal";
-import GroupManagement from "./pages/GroupManagement";
+import GroupManagement from "./pages/GroupManagement"; // ✅ added
+
 import "./index.css";
 
 const App: React.FC = () => {
@@ -21,15 +22,17 @@ const App: React.FC = () => {
         <MobileHeader />
       </div>
 
-      <main className="mt-3">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/driverlicenseportal" element={<DealerLicensePortal />} />
-           <Route path="/reports" element={<Reports />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/group-management" element={<GroupManagement/>} />
-        </Routes>
-      </main>
+<main className="mt-3 main-content" >
+  <Routes>
+    <Route path="/" element={<Dashboard />} />
+    <Route path="/driverlicenseportal" element={<DealerLicensePortal />} />
+    <Route path="/reports" element={<Reports />} />
+    <Route path="/settings" element={<Settings />} />
+    <Route path="/group-management" element={<GroupManagement />} />
+  </Routes>
+</main>
+
+
     </Router>
   );
 };
