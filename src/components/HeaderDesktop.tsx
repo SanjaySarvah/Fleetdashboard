@@ -8,7 +8,7 @@ function HeaderDesktop() {
     <>
       <header
         className="d-flex align-items-center justify-content-between px-3 py-2 shadow-sm bg-white position-fixed top-0 start-0 end-0 d-none d-md-flex "
-        style={{ zIndex: 1030 , marginLeft:'80px',}}
+        style={{ zIndex: 1030 , marginLeft:'50px',}}
       >
      
         <div className="d-flex align-items-center gap-3">

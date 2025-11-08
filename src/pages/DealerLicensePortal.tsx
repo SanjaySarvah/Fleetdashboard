@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { useNavigate } from "react-router-dom";
 
 type LicenseStatus = "In Stock" | "Live" | "Expired";
 
@@ -73,7 +74,7 @@ const DealerLicensePortal: React.FC = () => {
     },
   ];
 
-  const [licenses, setLicenses] = useState<License[]>(initialLicenses);
+  const [licenses, ] = useState<License[]>(initialLicenses);
 
   const counts = useMemo(() => {
     const total = licenses.length;
@@ -125,43 +126,16 @@ const stats = [
       bg: "rgba(239, 68, 68, 0.1)",
     },
   ];
+const navigate = useNavigate();
   const handleActivate = (code: string) => {
-    setLicenses((prev) =>
-      prev.map((l) => {
-        if (l.code === code) {
-          return {
-            ...l,
-            status: "Live",
-            startDate: new Date().toISOString().slice(0, 10),
-            endDate: undefined,
-            actionState: "Activated",
-          };
-        }
-        return l;
-      })
-    );
+    // redirect to ActivateLicense and send data if needed
+    navigate("/activate-license", { state: { code } });
   };
 
   const handleRenew = (code: string) => {
-    setLicenses((prev) =>
-      prev.map((l) => {
-        if (l.code === code) {
-          const start = new Date();
-          const end = new Date();
-          end.setFullYear(end.getFullYear() + 1);
-          return {
-            ...l,
-            status: "Live",
-            startDate: start.toISOString().slice(0, 10),
-            endDate: end.toISOString().slice(0, 10),
-            actionState: "Activated",
-          };
-        }
-        return l;
-      })
-    );
+    // redirect or handle renew logic
+    navigate("/", { state: { code } });
   };
-
 
   return (
     <div style={{ background: colors.surface, padding: "24px 36px", minHeight: "100vh" }}>
@@ -486,28 +460,27 @@ const stats = [
           )}
         </div>
 
-        {/* Action */}
         <div style={{ minWidth: "130px", textAlign: "end" }}>
-          {l.actionState === "Activated" && (
-            <div style={{ color: colors.mutedText }}>Activated</div>
-          )}
-          {l.actionState === "Activate" && (
-            <button
-              className="btn btn-success btn-sm"
-              onClick={() => handleActivate(l.code)}
-            >
-              <i className="bi bi-power me-2" /> Activate
-            </button>
-          )}
-          {l.actionState === "Renew" && (
-            <button
-              className="btn text-primary p-0"
-              onClick={() => handleRenew(l.code)}
-            >
-              Renew
-            </button>
-          )}
-        </div>
+      {l.actionState === "Activated" && (
+        <div style={{ color: colors.mutedText }}>Activated</div>
+      )}
+      {l.actionState === "Activate" && (
+        <button
+          className="btn btn-success btn-sm"
+          onClick={() => handleActivate(l.code)}
+        >
+          <i className="bi bi-power me-2" /> Activate
+        </button>
+      )}
+      {l.actionState === "Renew" && (
+        <button
+          className="btn text-primary p-0"
+          onClick={() => handleRenew(l.code)}
+        >
+          Renew
+        </button>
+      )}
+    </div>
       </div>
     ))
   ) : (
