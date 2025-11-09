@@ -19,301 +19,218 @@ const LicenseDetails: React.FC = () => {
   const [fuelSensor, setFuelSensor] = useState('');
   const [vehicleType, setVehicleType] = useState('');
   const [vehicleModel, setVehicleModel] = useState('');
-  const [location, setLocation] = useState('');
-  const [area, setArea] = useState('Depo');
-  const [notes, setNotes] = useState('Add any relevant notes here...');
+  const [notes, setNotes] = useState('');
   const [additionalFields, setAdditionalFields] = useState<AdditionalField[]>([]);
 
   const addAdditionalField = () => {
     const newField: AdditionalField = {
-      id: `additional-${Date.now()}`,
+      id: `field-${Date.now()}`,
       label: '',
       value: '',
     };
     setAdditionalFields((prev) => [...prev, newField]);
   };
 
-  const removeAdditionalField = (fieldId: string) => {
-    setAdditionalFields((prev) => prev.filter((field) => field.id !== fieldId));
+  const removeAdditionalField = (id: string) => {
+    setAdditionalFields((prev) => prev.filter((f) => f.id !== id));
   };
 
-  const updateAdditionalFieldLabel = (fieldId: string, label: string) => {
+  const updateField = (id: string, key: 'label' | 'value', val: string) => {
     setAdditionalFields((prev) =>
-      prev.map((field) => (field.id === fieldId ? { ...field, label } : field))
-    );
-  };
-
-  const updateAdditionalFieldValue = (fieldId: string, value: string) => {
-    setAdditionalFields((prev) =>
-      prev.map((field) => (field.id === fieldId ? { ...field, value } : field))
+      prev.map((f) => (f.id === id ? { ...f, [key]: val } : f))
     );
   };
 
   return (
-    <div className="container  pt-3" >
+    <div className="container py-4">
       <div className="row g-4">
-
         {/* License Details */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card shadow-sm">
-          
-            <div className="card-body">
-              <div className="mb-3">
-                <label className="form-label">License Code</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={licenseCode}
-                  onChange={(e) => setLicenseCode(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">License Duration</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={licenseDuration}
-                  onChange={(e) => setLicenseDuration(e.target.value)}
-                />
-              </div>
-            </div>
+        <div className="col-lg-4 col-md-6">
+          <h5 className="fw-bold mb-3">License Details</h5>
+          <div className="mb-3">
+            <label className="form-label">License Code</label>
+            <input
+              type="text"
+              className="form-control"
+              value={licenseCode}
+              onChange={(e) => setLicenseCode(e.target.value)}
+            />
           </div>
-        </div>
-
-        {/* SIM & GPS */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card shadow-sm">
- 
-            <div className="card-body">
-              <div className="mb-3">
-                <label className="form-label">SIM Model</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={simModel}
-                  onChange={(e) => setSimModel(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">SIM IMEI</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={simImei}
-                  onChange={(e) => setSimImei(e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* GPS Port */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card shadow-sm">
-      
-            <div className="card-body">
-                   <div className="mb-3">
-              <label className="form-label">GPS Port</label>
-              <input
-                type="text"
-                className="form-control"
-                value={gpsPort}
-                onChange={(e) => setGpsPort(e.target.value)}
-              />
-              </div>
-             <div className="mb-3">
-              <label className="form-label">Fuel Sensor</label>
-              <input
-                type="text"
-                className="form-control"
-                value={fuelSensor}
-                onChange={(e) => setFuelSensor(e.target.value)}
-              />
-            </div>
-            </div>
+          <div className="mb-3">
+            <label className="form-label">License Duration</label>
+            <select
+              className="form-select"
+              value={licenseDuration}
+              onChange={(e) => setLicenseDuration(e.target.value)}
+            >
+              <option>1 Year</option>
+              <option>2 Years</option>
+              <option>3 Years</option>
+            </select>
           </div>
         </div>
 
         {/* Device & Sensor */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card shadow-sm">
-     
-            <div className="card-body">
-              <div className="mb-3">
-                <label className="form-label">Device Model</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={deviceModel}
-                  onChange={(e) => setDeviceModel(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Device Info</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={deviceInfo}
-                  onChange={(e) => setDeviceInfo(e.target.value)}
-                />
-              </div>
-            </div>
+        <div className="col-lg-4 col-md-6">
+          <h5 className="fw-bold mb-3">Device & Sensor</h5>
+          <div className="mb-3">
+            <label className="form-label">Device Model</label>
+            <input
+              type="text"
+              className="form-control"
+              value={deviceModel}
+              onChange={(e) => setDeviceModel(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Device Info</label>
+            <input
+              type="text"
+              className="form-control"
+              value={deviceInfo}
+              onChange={(e) => setDeviceInfo(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Fuel Sensor</label>
+            <input
+              type="text"
+              className="form-control"
+              value={fuelSensor}
+              onChange={(e) => setFuelSensor(e.target.value)}
+            />
           </div>
         </div>
 
+        {/* SIM & GPS */}
+        <div className="col-lg-4 col-md-6">
+          <h5 className="fw-bold mb-3">SIM & GPS</h5>
+          <div className="mb-3">
+            <label className="form-label">SIM Model</label>
+            <input
+              type="text"
+              className="form-control"
+              value={simModel}
+              onChange={(e) => setSimModel(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">SIM IMEI</label>
+            <input
+              type="text"
+              className="form-control"
+              value={simImei}
+              onChange={(e) => setSimImei(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">GPS Port</label>
+            <input
+              type="text"
+              className="form-control"
+              value={gpsPort}
+              onChange={(e) => setGpsPort(e.target.value)}
+            />
+          </div>
+        </div>
 
         {/* Vehicle Details */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card shadow-sm">
-
-            <div className="card-body">
-              <div className="mb-3">
-                <label className="form-label">Vehicle Type</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={vehicleType}
-                  onChange={(e) => setVehicleType(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Vehicle Model</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={vehicleModel}
-                  onChange={(e) => setVehicleModel(e.target.value)}
-                />
-              </div>
-            </div>
+        <div className="col-lg-4 col-md-6">
+          <h5 className="fw-bold mb-3">Vehicle Details</h5>
+          <div className="mb-3">
+            <label className="form-label">Vehicle Type</label>
+            <input
+              type="text"
+              className="form-control"
+              value={vehicleType}
+              onChange={(e) => setVehicleType(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Vehicle Model</label>
+            <input
+              type="text"
+              className="form-control"
+              value={vehicleModel}
+              onChange={(e) => setVehicleModel(e.target.value)}
+            />
           </div>
         </div>
 
-        {/* Location */}
-        <div className="col-md-6 col-lg-4">
-          <div className="card shadow-sm">
-       
-            <div className="card-body">
-              <div className="mb-3">
-                <label className="form-label">Location</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Area</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={area}
-                  onChange={(e) => setArea(e.target.value)}
-                />
-              </div>
-            </div>
+        {/* Incremental (Dynamic Fields) */}
+        <div className="col-lg-4 col-md-6">
+          <h5 className="fw-bold mb-3">Incremental Attributes</h5>
+
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <span className="fw-semibold">Add or Edit Attributes</span>
+            <button
+              className="btn btn-sm btn-success"
+              type="button"
+              onClick={addAdditionalField}
+            >
+              + Add
+            </button>
           </div>
-        </div>
 
-<div className="row g-3">
-  {/* Notes */}
-  <div className="col-md-6">
-    <div className="card shadow-sm h-100">
-      <div className="card-body">
-        <label className="form-label fw-semibold mb-2">Additional Notes</label>
-        <textarea
-          className="form-control"
-          rows={2}
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          placeholder="Enter notes here..."
-        />
-      </div>
-    </div>
-  </div>
-
-  {/* Additional Attributes */}
-  <div className="col-md-6">
-    <div className="card shadow-sm h-100">
-      <div className="card-body">
-        <div className="d-flex align-items-center justify-content-between mb-3">
-          <label className="form-label fw-semibold mb-0">Additional Attributes</label>
-          <button
-            type="button"
-            className="btn btn-sm btn-success"
-            onClick={() => {
-              const id = addAdditionalField();
-              // ✅ Automatically focus on the newly added input
-              setTimeout(() => {
-                const newInput = document.querySelector<HTMLInputElement>(
-                  `#attribute-label-${id}`
-                );
-                newInput?.focus();
-              }, 100);
-            }}
-          >
-            + Add Attribute
-          </button>
-        </div>
-
-        {additionalFields.length > 0 ? (
-          additionalFields.map((field) => (
-            <div key={field.id} className="border rounded p-3 mb-3">
-              <div className="row g-2 align-items-center">
-                <div className="col-10">
+          {additionalFields.length > 0 ? (
+            additionalFields.map((field) => (
+              <div
+                key={field.id}
+                className="border rounded-3 p-2 mb-3 bg-light"
+              >
+                <div className="d-flex gap-2 mb-2">
                   <input
-                    id={`attribute-label-${field.id}`}
                     type="text"
                     className="form-control"
-                    placeholder="Attribute label"
+                    placeholder="Attribute Label"
                     value={field.label}
                     onChange={(e) =>
-                      updateAdditionalFieldLabel(field.id, e.target.value)
+                      updateField(field.id, 'label', e.target.value)
                     }
                   />
-                </div>
-                <div className="col-2 text-end">
                   <button
-                    type="button"
                     className="btn btn-outline-danger btn-sm"
+                    type="button"
                     onClick={() => removeAdditionalField(field.id)}
                   >
                     ✕
                   </button>
                 </div>
-              </div>
-              <div className="mt-2">
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Attribute value"
+                  placeholder="Attribute Value"
                   value={field.value}
                   onChange={(e) =>
-                    updateAdditionalFieldValue(field.id, e.target.value)
+                    updateField(field.id, 'value', e.target.value)
                   }
                 />
               </div>
+            ))
+          ) : (
+            <div className="text-muted small border border-dashed rounded p-3 text-center">
+              No attributes added yet
             </div>
-          ))
-        ) : (
-          <div className="text-center text-muted py-2 border border-2 border-dashed rounded">
-            No attributes added yet
-          </div>
-        )}
-      </div>
-    </div>
-  </div>
-</div>
-
-
-  
-
-        {/* Action Buttons */}
-        <div className="col-12 mt-4 border-top pt-2 d-flex justify-content-end gap-2" style={{paddingBottom:'10px'}}>
-          <button className="btn btn-outline-secondary px-4">Close</button>
-          <button className="btn btn-primary px-4">Activate</button>
+          )}
         </div>
+
+        {/* Notes */}
+        <div className="col-lg-4 col-md-6">
+          <h5 className="fw-bold mb-3">Notes</h5>
+          <textarea
+            className="form-control"
+            rows={6}
+            placeholder="Add any relevant notes here..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="d-flex justify-content-end gap-2 mt-4 border-top pt-3">
+        <button className="btn btn-outline-secondary px-4">Close</button>
+        <button className="btn btn-primary px-4">Activate</button>
       </div>
     </div>
   );
