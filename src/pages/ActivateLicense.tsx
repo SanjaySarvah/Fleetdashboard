@@ -159,7 +159,7 @@ const LicenseDetails: React.FC = () => {
 
         {/* Incremental (Dynamic Fields) */}
         <div className="col-lg-4 col-md-6">
-          <h5 className="fw-bold mb-3">Incremental Attributes</h5>
+          <h5 className="fw-bold mb-3">Attributes</h5>
 
           <div className="d-flex justify-content-between align-items-center mb-3">
             <span className="fw-semibold">Add or Edit Attributes</span>
